@@ -1,0 +1,270 @@
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { puppets, gallery, images, type Puppet } from "@/lib/data";
+import PlaceholderImage from "./PlaceholderImage";
+
+export default function Marionnettes() {
+  return (
+    <section id="marionnettes" className="relative bg-ink-950 text-cream-50">
+      {/* Top transition */}
+      <div className="h-32 bg-gradient-to-b from-cream-100 to-ink-950" />
+
+      {/* Section header */}
+      <div className="relative pt-24 pb-16 text-center px-6">
+        <div className="mx-auto max-w-4xl">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="font-mono text-[11px] uppercase tracking-[0.32em] text-moon-400"
+          >
+            Création principale · Compagnie des Vieux Luneux
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="mt-6 font-display text-display-1 font-medium text-balance"
+          >
+            Les Vieux <span className="italic text-moon-400">Luneux</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="mx-auto mt-8 max-w-2xl text-lg text-cream-50/65 sm:text-xl text-pretty"
+          >
+            Des personnages d'une humanité bouleversante — sculptés, habillés,
+            animés avec une précision qui confond le réel.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Sticky scroll storytelling */}
+      <div className="relative">
+        {puppets.map((p, i) => (
+          <PuppetStory key={p.id} puppet={p} index={i} />
+        ))}
+      </div>
+
+      {/* Marquee gallery */}
+      <GalleryMarquee />
+
+      {/* Atelier */}
+      <Atelier />
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   Sticky scroll story — Apple iPhone-style
+   ───────────────────────────────────────────── */
+function PuppetStory({ puppet, index }: { puppet: Puppet; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const imgY     = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.05]);
+  const textOp   = useTransform(scrollYProgress, [0.1, 0.4, 0.7, 0.9], [0, 1, 1, 0]);
+  const textY    = useTransform(scrollYProgress, [0.1, 0.4], [40, 0]);
+
+  const isReversed = index % 2 === 1;
+
+  return (
+    <div ref={ref} id={puppet.id} className="relative py-20 sm:py-32">
+      {/* Backdrop ambient gradient */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          background: `radial-gradient(ellipse at ${
+            isReversed ? "20% 50%" : "80% 50%"
+          }, ${puppet.color}30 0%, transparent 60%)`,
+        }}
+      />
+
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-16">
+        {/* Image */}
+        <div
+          className={`relative lg:col-span-7 ${
+            isReversed ? "lg:order-2" : "lg:order-1"
+          }`}
+        >
+          <div className="sticky top-24 lg:top-32">
+            <motion.div
+              style={{ y: imgY, scale: imgScale }}
+              className="relative aspect-[3/4] w-full max-w-2xl mx-auto rounded-3xl overflow-hidden ring-1 ring-cream-50/10 shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
+            >
+              <div
+                className="pointer-events-none absolute -inset-px rounded-3xl opacity-40"
+                style={{ boxShadow: `inset 0 0 80px ${puppet.color}25` }}
+              />
+              <PlaceholderImage
+                src={puppet.imagePortrait}
+                alt={`${puppet.name} — Marionnette des Vieux Luneux`}
+                label={`${puppet.name} — Photo Julie Palot`}
+                gradient={`linear-gradient(160deg, ${puppet.color}cc 0%, #0a0a10 100%)`}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
+            </motion.div>
+
+            {/* Floating action thumbnail */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className={`absolute bottom-6 ${
+                isReversed ? "left-6" : "right-6"
+              } hidden h-32 w-44 rounded-2xl overflow-hidden ring-1 ring-cream-50/20 shadow-2xl backdrop-blur-sm sm:block`}
+            >
+              <PlaceholderImage
+                src={puppet.imageAction}
+                alt={`${puppet.name} en spectacle`}
+                label={`${puppet.name} en scène`}
+                gradient={`linear-gradient(160deg, ${puppet.color}99 0%, #050508 100%)`}
+                sizes="200px"
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Text */}
+        <motion.div
+          style={{ opacity: textOp, y: textY }}
+          className={`flex items-center lg:col-span-5 ${
+            isReversed ? "lg:order-1" : "lg:order-2"
+          }`}
+        >
+          <div className="w-full">
+            <div
+              className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em]"
+              style={{ borderColor: puppet.color, color: puppet.color }}
+            >
+              <span className="text-base leading-none">{puppet.emoji}</span>
+              Le Croissant de Lune {puppet.name === "Oscar" || puppet.name === "Amédée" ? "d'" : "de "}{puppet.name}
+            </div>
+
+            <h3 className="font-display text-display-2 font-medium text-cream-50">
+              {puppet.title}
+              <br />
+              <span className="italic" style={{ color: puppet.color }}>
+                {puppet.subtitle}
+              </span>
+            </h3>
+
+            <p className="mt-8 text-lg leading-relaxed text-cream-50/70 text-pretty">
+              {puppet.quote}
+            </p>
+
+            <div className="mt-10 flex items-center gap-4">
+              <div className="h-px flex-1 bg-cream-50/15" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-cream-50/40">
+                0{index + 1} / 0{puppets.length}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   Marquee gallery
+   ───────────────────────────────────────────── */
+function GalleryMarquee() {
+  return (
+    <div className="relative py-20 overflow-hidden">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-ink-950 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-ink-950 to-transparent" />
+
+      <div className="marquee-track gap-5 px-5">
+        {[...gallery, ...gallery].map((item, i) => (
+          <div
+            key={i}
+            className="group relative h-[420px] w-[300px] flex-shrink-0 overflow-hidden rounded-2xl ring-1 ring-cream-50/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-500 hover:ring-moon-500/40"
+          >
+            <PlaceholderImage
+              src={item.src}
+              alt={item.label}
+              label={item.label}
+              gradient="linear-gradient(160deg, #2a2a3a 0%, #050508 100%)"
+              sizes="300px"
+            />
+            {/* Caption overlay */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cream-50/80">
+                {item.label}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   Atelier (making-of)
+   ───────────────────────────────────────────── */
+function Atelier() {
+  return (
+    <div className="relative py-32 px-6">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-moon-400">
+            Dans l'atelier
+          </p>
+          <h3 className="mt-5 font-display text-display-3 font-medium text-cream-50 text-balance">
+            La naissance d'un monde,
+            <br />
+            <span className="italic text-moon-400">geste après geste.</span>
+          </h3>
+          <div className="mt-8 space-y-6 text-lg text-cream-50/70 leading-relaxed">
+            <p>
+              De la mousse à la résine, du fil de fer à la soie — chaque
+              Vieux Luneux naît de mois de travail minutieux. Stéphanie
+              sculpte, modèle, peint, coud.
+            </p>
+            <p>
+              Le corps entier des personnages est sculpté à l'échelle 1, avec
+              une attention aux détails — chaque ride, chaque cheveu — qui
+              crée ce sentiment vertigineux de présence.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl"
+        >
+          <PlaceholderImage
+            src={images.atelierSculpture1}
+            alt="Stéphanie en atelier — création d'une marionnette"
+            label="Atelier · Création"
+            gradient="linear-gradient(160deg, #3a3020 0%, #0a0a10 100%)"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        </motion.div>
+      </div>
+    </div>
+  );
+}

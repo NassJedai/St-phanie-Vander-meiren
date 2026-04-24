@@ -1,0 +1,28 @@
+# Place your puppet/spectacle/atelier photos here.
+# Expected filenames (referenced in lib/data.ts and components):
+#
+# Hero & artiste
+# - stephanie-portrait.jpg
+#
+# Marionnettes
+# - oscar-portrait.jpg
+# - oscar-action.jpg
+# - mia-portrait.jpg
+# - mia-diorama.jpg
+# - amedee-portrait.jpg
+# - amedee-action.jpg
+#
+# Galerie défilante (8 photos)
+# - gallery-1.jpg ... gallery-8.jpg
+#
+# Atelier
+# - atelier-creation.jpg
+# - atelier-workshop.jpg
+#
+# Spectacles
+# - spectacle-scene.jpg
+# - spectacle-lune.jpg
+# - spectacle-rue.jpg
+#
+# Until photos are added, the site automatically renders elegant
+# gradient placeholders with descriptive captions.
