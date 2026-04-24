@@ -87,7 +87,7 @@ export default function Livres() {
                     alt={`Couverture du livre ${book.title}`}
                     fill
                     sizes="(max-width: 640px) 180px, (max-width: 1024px) 33vw, 18vw"
-                    className="object-contain"
+                    className="object-cover"
                   />
                 </div>
 
