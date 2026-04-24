@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
+import { images } from "@/lib/data";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
@@ -20,15 +22,40 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative bg-ink-950 py-32 px-6 overflow-hidden"
+      className="relative py-32 px-6 overflow-hidden"
     >
-      {/* Atmospheric background */}
-      <div className="absolute inset-0 atmosphere-stars opacity-50" />
+      {/* Papier peint background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <Image
+          src={images.papierPeint1}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Darken overlay to keep form readable while preserving texture */}
       <div
-        className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full"
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-ink-950/75"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle, rgba(212,168,76,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(8,8,12,0.4) 60%, rgba(8,8,12,0.85) 100%)",
+        }}
+      />
+
+      {/* Soft gold glow top-right */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(212,168,76,0.08) 0%, transparent 70%)",
         }}
       />
 
@@ -59,7 +86,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="mx-auto mt-6 max-w-lg text-lg text-cream-50/65"
+            className="mx-auto mt-6 max-w-lg text-lg text-cream-50/70"
           >
             Demandes de spectacles, d'ateliers, d'illustrations — ou
             simplement pour en savoir plus.
@@ -72,7 +99,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="mt-16 space-y-5"
+          className="mt-16 space-y-5 rounded-3xl border border-cream-50/10 bg-ink-950/60 p-8 backdrop-blur-xl sm:p-10"
         >
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field id="name" label="Nom" type="text" placeholder="Votre nom" />

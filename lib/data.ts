@@ -28,6 +28,9 @@ export const images = {
   masque: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019735/Masque_re%CC%81alise%CC%81_eth7ss.jpg",
   dessin: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019730/Dessin_re%CC%81alise%CC%81_dn0avh.jpg",
 
+  // Fonds & textures
+  papierPeint1: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777024933/papier_peint1_k1nyqz.jpg",
+
   // Livres
   livreRocaillou:    "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019729/livre_rocaillou_skdxg7.jpg",
   livrePetiteVie:    "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019724/Livre_petite-vie-deviendra-grande_cn8sfx.jpg",
@@ -38,56 +41,64 @@ export const images = {
 
 
 /* ─────────────────────────────────────────────
-   PUPPETS — sticky scroll storytelling
+   MARIONNETTES — 3 blocs thématiques
    ───────────────────────────────────────────── */
 export type Puppet = {
   id: string;
-  name: string;
+  emoji?: string;
   title: string;
-  subtitle: string;
-  quote: string;
+  paragraphs: string[];
+  bullets?: string[];
+  outro?: string[];
   color: string;
   imagePortrait: string;
   imageAction: string;
-  emoji: string;
 };
 
 export const puppets: Puppet[] = [
   {
-    id: "oscar",
-    name: "Oscar",
-    title: "La Partie de cartes",
-    subtitle: "sous les étoiles",
-    quote:
-      "Quand Oscar pointe de sa canne les moments intenses de sa vie bien chargée. Quand ses valises s'ouvrent sur ses malices d'antan, les échanges entre bons copains ressurgissent pour le plus grand bonheur de cet As au grand cœur.",
+    id: "vieux-luneux",
+    emoji: "🌙",
+    title: "Les Vieux Luneux",
+    paragraphs: [
+      "Nés dans le cadre de l'opéra urbain Décrocher la Lune à La Louvière, les Vieux Luneux incarnent la mémoire vivante des quartiers et des habitants.",
+      "Créés en 2018 pour la 7ᵉ édition du spectacle, ces sept personnages sont des marionnettes à taille humaine représentant des figures âgées, inspirées de l'histoire et des récits locaux. Chacun d'eux porte l'âme d'un quartier, comme un témoin sensible du passé et des vies qui l'ont façonné.",
+      "Pensés comme des « sages de nos quartiers », ils déambulent dans l'espace public, dansent, interpellent et émeuvent sans prononcer un mot, laissant place à une narration universelle faite de gestes, de regards et de souvenirs.",
+    ],
     color: "#789a7d",
-    imagePortrait: images.luneux1,
-    imageAction: images.luneux2,
-    emoji: "☽",
+    imagePortrait: images.luneuxGroup,
+    imageAction: images.luneux1,
   },
   {
-    id: "mia",
-    name: "Mia",
-    title: "Le Jardin",
-    subtitle: "lunatique",
-    quote:
-      "Quand Mia jardine avec la Lune, ses premiers semis de souvenirs sortent de terre, les carottes chantent et l'arrosoir se dandine. La Lune lui rappelle que ses précieux printemps ne sont pas fanés.",
+    id: "sculpture-marionnette",
+    title: "Sculpture & Marionnette",
+    paragraphs: [
+      "Entre matière et mouvement, Stéphanie Vander Meiren développe un travail sculptural où les formes prennent vie.",
+      "Ses créations mêlent volumes, textures et textiles pour donner naissance à des personnages singuliers, à la frontière entre objet et présence vivante. Chaque marionnette est pensée comme une figure narrative, porteuse d'émotions, d'histoires et de gestes.",
+      "Modeler, assembler, habiller : le processus de création est profondément artisanal. Il laisse place à l'expérimentation, au détournement de matériaux et à une attention particulière portée aux détails, aux expressions et à la corporalité.",
+    ],
     color: "#b59b6a",
-    imagePortrait: images.luneux3,
-    imageAction: images.luneux4,
-    emoji: "✿",
+    imagePortrait: images.atelierSculpture1,
+    imageAction: images.masque,
   },
   {
-    id: "amedee",
-    name: "Amédée",
-    title: "La Lune",
-    subtitle: "à facettes",
-    quote:
-      "Quand Amédée fait danser ses pensées, il entend les premières notes d'un morceau disco… Quand la Lune se prend pour une boule à facettes, la nostalgie de ce Vieux Luneux se déhanche sur les rythmes de sa jeunesse.",
+    id: "personnages-incarner",
+    title: "Des personnages à incarner",
+    paragraphs: [
+      "Plus que de simples objets, ses marionnettes sont conçues pour être activées, manipulées, mises en scène. Elles trouvent leur place dans :",
+    ],
+    bullets: [
+      "des spectacles et projets scénographiques",
+      "des performances et déambulations",
+      "des ateliers participatifs",
+      "des projets pédagogiques",
+    ],
+    outro: [
+      "À travers le mouvement, elles deviennent un langage à part entière, universel et accessible, où le corps remplace la parole.",
+    ],
     color: "#d4a84c",
-    imagePortrait: images.luneux5,
-    imageAction: images.luneux6,
-    emoji: "✦",
+    imagePortrait: images.luneux8,
+    imageAction: images.agnes2,
   },
 ];
 
@@ -97,14 +108,14 @@ export const puppets: Puppet[] = [
    ───────────────────────────────────────────── */
 export const gallery: { src: string; label: string }[] = [
   { src: images.luneux7,    label: "Les Vieux Luneux" },
-  { src: images.luneuxGroup,label: "La compagnie" },
+  { src: images.luneux2,    label: "Portrait" },
   { src: images.agnes2,     label: "Agnès" },
-  { src: images.luneux8,    label: "En spectacle" },
+  { src: images.luneux3,    label: "En spectacle" },
   { src: images.agnes3,     label: "Marionnette Agnès" },
   { src: images.masque,     label: "Masque réalisé" },
   { src: images.luneux9,    label: "Vieux Luneux en scène" },
   { src: images.agnesMini,  label: "Mini marionnette Agnès" },
-  { src: images.dessin,     label: "Dessin original" },
+  { src: images.luneux4,    label: "Détail" },
 ];
 
 

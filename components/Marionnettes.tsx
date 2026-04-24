@@ -21,7 +21,7 @@ export default function Marionnettes() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-mono text-[11px] uppercase tracking-[0.32em] text-moon-400"
           >
-            Création principale · Compagnie des Vieux Luneux
+            Création · Scène &amp; Rue
           </motion.p>
 
           <motion.h2
@@ -31,7 +31,7 @@ export default function Marionnettes() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="mt-6 font-display text-display-1 font-medium text-balance"
           >
-            Les Vieux <span className="italic text-moon-400">Luneux</span>
+            <span className="italic text-moon-400">Marionnettes</span>
           </motion.h2>
 
           <motion.p
@@ -47,7 +47,7 @@ export default function Marionnettes() {
         </div>
       </div>
 
-      {/* Sticky scroll storytelling */}
+      {/* Sticky scroll thematic blocks */}
       <div className="relative">
         {puppets.map((p, i) => (
           <PuppetStory key={p.id} puppet={p} index={i} />
@@ -64,7 +64,7 @@ export default function Marionnettes() {
 }
 
 /* ─────────────────────────────────────────────
-   Sticky scroll story — Apple iPhone-style
+   Sticky scroll thematic block
    ───────────────────────────────────────────── */
 function PuppetStory({ puppet, index }: { puppet: Puppet; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -73,8 +73,8 @@ function PuppetStory({ puppet, index }: { puppet: Puppet; index: number }) {
     offset: ["start end", "end start"],
   });
 
-  const imgY     = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1, 1.05]);
+  const imgY     = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.03, 1, 1.03]);
   const textOp   = useTransform(scrollYProgress, [0.1, 0.4, 0.7, 0.9], [0, 1, 1, 0]);
   const textY    = useTransform(scrollYProgress, [0.1, 0.4], [40, 0]);
 
@@ -102,22 +102,30 @@ function PuppetStory({ puppet, index }: { puppet: Puppet; index: number }) {
           <div className="sticky top-24 lg:top-32">
             <motion.div
               style={{ y: imgY, scale: imgScale }}
-              className="relative aspect-[3/4] w-full max-w-2xl mx-auto rounded-3xl overflow-hidden ring-1 ring-cream-50/10 shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
+              className="relative aspect-[4/5] w-full max-w-2xl mx-auto rounded-3xl overflow-hidden ring-1 ring-cream-50/10 shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
             >
+              {/* Backdrop tinted by puppet color for any letterboxing */}
               <div
-                className="pointer-events-none absolute -inset-px rounded-3xl opacity-40"
-                style={{ boxShadow: `inset 0 0 80px ${puppet.color}25` }}
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(160deg, ${puppet.color}22 0%, #050508 100%)`,
+                }}
               />
               <PlaceholderImage
                 src={puppet.imagePortrait}
-                alt={`${puppet.name} — Marionnette des Vieux Luneux`}
-                label={`${puppet.name} — Photo Julie Palot`}
+                alt={`Marionnette — ${puppet.title}`}
+                label={puppet.title}
                 gradient={`linear-gradient(160deg, ${puppet.color}cc 0%, #0a0a10 100%)`}
                 sizes="(max-width: 1024px) 100vw, 60vw"
+                fit="contain"
+              />
+              <div
+                className="pointer-events-none absolute -inset-px rounded-3xl"
+                style={{ boxShadow: `inset 0 0 100px ${puppet.color}20` }}
               />
             </motion.div>
 
-            {/* Floating action thumbnail */}
+            {/* Floating secondary thumbnail */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -129,8 +137,8 @@ function PuppetStory({ puppet, index }: { puppet: Puppet; index: number }) {
             >
               <PlaceholderImage
                 src={puppet.imageAction}
-                alt={`${puppet.name} en spectacle`}
-                label={`${puppet.name} en scène`}
+                alt=""
+                label=""
                 gradient={`linear-gradient(160deg, ${puppet.color}99 0%, #050508 100%)`}
                 sizes="200px"
               />
@@ -146,25 +154,41 @@ function PuppetStory({ puppet, index }: { puppet: Puppet; index: number }) {
           }`}
         >
           <div className="w-full">
-            <div
-              className="mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em]"
-              style={{ borderColor: puppet.color, color: puppet.color }}
-            >
-              <span className="text-base leading-none">{puppet.emoji}</span>
-              Le Croissant de Lune {puppet.name === "Oscar" || puppet.name === "Amédée" ? "d'" : "de "}{puppet.name}
-            </div>
-
-            <h3 className="font-display text-display-2 font-medium text-cream-50">
-              {puppet.title}
-              <br />
-              <span className="italic" style={{ color: puppet.color }}>
-                {puppet.subtitle}
-              </span>
+            <h3 className="font-display text-display-2 font-medium text-cream-50 text-balance">
+              {puppet.emoji && (
+                <span
+                  className="mr-3 inline-block align-middle text-[0.75em]"
+                  aria-hidden
+                >
+                  {puppet.emoji}
+                </span>
+              )}
+              <span style={{ color: puppet.color }}>{puppet.title}</span>
             </h3>
 
-            <p className="mt-8 text-lg leading-relaxed text-cream-50/70 text-pretty">
-              {puppet.quote}
-            </p>
+            <div className="mt-8 space-y-5 text-lg leading-relaxed text-cream-50/75 text-pretty">
+              {puppet.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+
+              {puppet.bullets && (
+                <ul className="mt-2 space-y-2">
+                  {puppet.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-cream-50/85">
+                      <span
+                        className="mt-2.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full"
+                        style={{ background: puppet.color }}
+                      />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {puppet.outro?.map((p, i) => (
+                <p key={`outro-${i}`}>{p}</p>
+              ))}
+            </div>
 
             <div className="mt-10 flex items-center gap-4">
               <div className="h-px flex-1 bg-cream-50/15" />
@@ -238,8 +262,8 @@ function Atelier() {
           <div className="mt-8 space-y-6 text-lg text-cream-50/70 leading-relaxed">
             <p>
               De la mousse à la résine, du fil de fer à la soie — chaque
-              Vieux Luneux naît de mois de travail minutieux. Stéphanie
-              sculpte, modèle, peint, coud.
+              personnage naît de mois de travail minutieux. Stéphanie sculpte,
+              modèle, peint, coud.
             </p>
             <p>
               Le corps entier des personnages est sculpté à l'échelle 1, avec
@@ -254,7 +278,7 @@ function Atelier() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl"
+          className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-cream-50/10"
         >
           <PlaceholderImage
             src={images.atelierSculpture1}

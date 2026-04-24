@@ -4,12 +4,6 @@ import { motion } from "framer-motion";
 import PlaceholderImage from "./PlaceholderImage";
 import { images } from "@/lib/data";
 
-const stats = [
-  { num: "5",  label: "Livres jeunesse publiés" },
-  { num: "3+", label: "Personnages des Vieux Luneux" },
-  { num: "20+",label: "Années de création" },
-];
-
 export default function About() {
   return (
     <section
@@ -26,7 +20,6 @@ export default function About() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,49 +78,33 @@ export default function About() {
             className="lg:col-span-7"
           >
             <h2 className="font-display text-display-2 font-medium text-ink-900 text-balance">
-              Une artiste au toucher{" "}
-              <span className="italic text-terra-500">sensible</span>.
+              Artiste{" "}
+              <span className="italic text-terra-500">pluridisciplinaire</span>.
             </h2>
 
             <div className="mt-10 max-w-2xl space-y-6 text-lg text-ink-900/75 leading-relaxed">
               <p>
-                Diplômée de l'Académie Royale des Beaux-Arts de Bruxelles en
-                sculpture, Stéphanie Vander Meiren tisse un univers singulier
-                où se rencontrent narration visuelle, textile, scénographie et
-                spectacle vivant.
+                Artiste visuelle et illustratrice, Stéphanie Vander Meiren
+                développe un univers sensible et poétique, à la croisée de
+                l'illustration, de la scénographie et des arts plastiques.
               </p>
               <p>
-                Son travail est ancré dans le{" "}
-                <strong className="font-semibold text-ink-900">geste artisanal</strong> —
-                la matière modelée, sculptée, cousue avec une attention
-                constante à la dimension poétique et humaine. Chaque
-                personnage naît de mois de travail minutieux, de la mousse à
-                la résine, du fil de fer à la soie.
+                Ses créations prennent forme à travers le dessin, le volume, le
+                textile et la mise en scène, donnant naissance à des œuvres où
+                l'imaginaire dialogue avec le réel.
               </p>
-            </div>
-
-            {/* Stats — Apple-style */}
-            <div className="mt-14 grid grid-cols-3 gap-6 border-t border-ink-900/10 pt-10">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.4 + i * 0.1,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  <div className="font-display text-4xl text-ink-900 tabular-nums sm:text-5xl">
-                    {s.num}
-                  </div>
-                  <div className="mt-2 text-xs text-ink-900/60 sm:text-sm">
-                    {s.label}
-                  </div>
-                </motion.div>
-              ))}
+              <p>
+                Du livre jeunesse aux fresques urbaines, en passant par la
+                création de marionnettes et d'univers scénographiques, chaque
+                projet est pensé comme une expérience narrative, immersive et
+                vivante.
+              </p>
+              <p>
+                À travers son travail, elle explore des thématiques liées à
+                l'enfance, à la transmission et à la mémoire collective, tout
+                en invitant le public à entrer dans des mondes où se mêlent
+                poésie, matière et émotion.
+              </p>
             </div>
           </motion.div>
         </div>

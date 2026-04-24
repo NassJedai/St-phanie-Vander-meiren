@@ -14,6 +14,7 @@ type Props = {
   sizes?: string;
   width?: number;
   height?: number;
+  fit?: "cover" | "contain";
 };
 
 /**
@@ -32,6 +33,7 @@ export default function PlaceholderImage({
   sizes,
   width,
   height,
+  fit = "cover",
 }: Props) {
   const [errored, setErrored] = useState(false);
 
@@ -47,7 +49,7 @@ export default function PlaceholderImage({
           sizes={sizes ?? "(max-width: 768px) 100vw, 50vw"}
           priority={priority}
           onError={() => setErrored(true)}
-          className="object-cover"
+          className={fit === "contain" ? "object-contain" : "object-cover"}
         />
       </div>
     );

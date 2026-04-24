@@ -45,10 +45,23 @@ export default function Livres() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-lg text-ink-900/65 text-pretty"
+            className="mx-auto mt-6 max-w-3xl text-lg text-ink-900/75 leading-relaxed text-pretty"
           >
-            Des mondes où le dessin devient récit — chaque page une invitation
-            au voyage intérieur.
+            À travers ses illustrations, Stéphanie Vander Meiren donne vie à
+            des récits où l'image prolonge et enrichit le texte.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+            className="mx-auto mt-4 max-w-3xl text-lg text-ink-900/70 leading-relaxed text-pretty"
+          >
+            Son univers graphique, à la fois sensible et narratif, accompagne
+            principalement des ouvrages jeunesse, en lien avec l'imaginaire,
+            le patrimoine et la transmission. Chaque illustration est pensée
+            comme une porte d'entrée dans l'histoire : elle guide le regard,
+            suggère des émotions et laisse place à l'interprétation.
           </motion.p>
         </div>
 
