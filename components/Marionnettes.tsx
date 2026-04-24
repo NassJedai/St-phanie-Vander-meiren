@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { puppets, gallery, images, type Puppet } from "@/lib/data";
@@ -7,9 +8,32 @@ import PlaceholderImage from "./PlaceholderImage";
 
 export default function Marionnettes() {
   return (
-    <section id="marionnettes" className="relative bg-ink-950 text-cream-50">
+    <section
+      id="marionnettes"
+      className="relative bg-ink-950 text-cream-50 isolate"
+    >
+      {/* Background — dessin couverture with heavy darkening */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src={images.dessin}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-90"
+          style={{ objectPosition: "center" }}
+        />
+        <div className="absolute inset-0 bg-ink-950/90" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(8,8,12,0.5) 50%, rgba(8,8,12,0.95) 100%)",
+          }}
+        />
+      </div>
+
       {/* Top transition */}
-      <div className="h-32 bg-gradient-to-b from-cream-100 to-ink-950" />
+      <div className="h-32 bg-gradient-to-b from-cream-100 to-ink-950/80" />
 
       {/* Section header */}
       <div className="relative pt-24 pb-16 text-center px-6">
@@ -259,16 +283,22 @@ function Atelier() {
             <br />
             <span className="italic text-moon-400">geste après geste.</span>
           </h3>
-          <div className="mt-8 space-y-6 text-lg text-cream-50/70 leading-relaxed">
+          <div className="mt-8 space-y-6 text-lg text-cream-50/75 leading-relaxed">
             <p>
-              De la mousse à la résine, du fil de fer à la soie — chaque
-              personnage naît de mois de travail minutieux. Stéphanie sculpte,
-              modèle, peint, coud.
+              Chaque personnage émerge au fil de mois de travail minutieux.
+              Stéphanie sculpte, modèle, peint et coud, dans un dialogue
+              constant entre la main et la matière.
             </p>
             <p>
-              Le corps entier des personnages est sculpté à l'échelle 1, avec
-              une attention aux détails — chaque ride, chaque cheveu — qui
-              crée ce sentiment vertigineux de présence.
+              Les corps prennent forme à l'échelle humaine, avec une attention
+              extrême portée aux détails. Une ride, une posture, un regard,
+              chaque élément participe à faire naître une présence troublante,
+              presque vivante.
+            </p>
+            <p>
+              Entre précision artisanale et souffle poétique, ses créations
+              donnent le sentiment rare d'être face à quelqu'un, plutôt qu'à
+              quelque chose.
             </p>
           </div>
         </motion.div>

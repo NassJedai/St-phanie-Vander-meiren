@@ -42,7 +42,7 @@ export default function About() {
             <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:mx-0">
               <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
                 <PlaceholderImage
-                  src={images.stephaniePortrait}
+                  src={images.stephanie2}
                   alt="Stéphanie Vander Meiren"
                   label="Portrait de l'artiste"
                   gradient="linear-gradient(160deg, #b59b6a 0%, #5a4030 100%)"
@@ -100,10 +100,10 @@ export default function About() {
                 vivante.
               </p>
               <p>
-                À travers son travail, elle explore des thématiques liées à
-                l'enfance, à la transmission et à la mémoire collective, tout
-                en invitant le public à entrer dans des mondes où se mêlent
-                poésie, matière et émotion.
+                À travers son travail, elle explore entre autre des
+                thématiques liées à l'âge, à la transmission et à la mémoire
+                collective, tout en invitant le public à entrer dans des
+                mondes où se mêlent poésie, matière et émotion.
               </p>
             </div>
           </motion.div>

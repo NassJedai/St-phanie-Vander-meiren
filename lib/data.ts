@@ -3,9 +3,11 @@
    ───────────────────────────────────────────── */
 export const images = {
   // Stéphanie
-  stephaniePortrait: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019732/Photo_ste%CC%81phanie_ubap1h.jpg",
-  atelierSculpture1: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019737/Ste%CC%81phanie_entrain_de_re%CC%81aliser_une_sculture_c4d4rk.jpg",
-  atelierSculpture2: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019738/Ste%CC%81phanie_entrain_de_re%CC%81aliser_une_sculture_2_jzduwh.jpg",
+  stephaniePortrait:     "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019732/Photo_ste%CC%81phanie_ubap1h.jpg",
+  stephanie2:            "https://res.cloudinary.com/dksg8jr17/image/upload/v1777042334/Ste%CC%81phanie_2_rmfzpz.jpg",
+  stephanieVanderMeiren: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777042335/Ste%CC%81phanie_vander_meiren_hujcpr.jpg",
+  atelierSculpture1:     "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019737/Ste%CC%81phanie_entrain_de_re%CC%81aliser_une_sculture_c4d4rk.jpg",
+  atelierSculpture2:     "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019738/Ste%CC%81phanie_entrain_de_re%CC%81aliser_une_sculture_2_jzduwh.jpg",
 
   // Vieux Luneux
   luneuxGroup: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019729/Marionnette_les_vieux_luneux_r3l0cl.jpg",
@@ -29,7 +31,8 @@ export const images = {
   dessin: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019730/Dessin_re%CC%81alise%CC%81_dn0avh.jpg",
 
   // Fonds & textures
-  papierPeint1: "https://res.cloudinary.com/dksg8jr17/image/upload/v1777024933/papier_peint1_k1nyqz.jpg",
+  papierPeint1:  "https://res.cloudinary.com/dksg8jr17/image/upload/v1777024933/papier_peint1_k1nyqz.jpg",
+  dessinLesVieux:"https://res.cloudinary.com/dksg8jr17/image/upload/v1777042340/dessin_les_vieux_kgvdg6.jpg",
 
   // Livres
   livreRocaillou:    "https://res.cloudinary.com/dksg8jr17/image/upload/v1777019729/livre_rocaillou_skdxg7.jpg",
@@ -78,7 +81,7 @@ export const puppets: Puppet[] = [
       "Modeler, assembler, habiller : le processus de création est profondément artisanal. Il laisse place à l'expérimentation, au détournement de matériaux et à une attention particulière portée aux détails, aux expressions et à la corporalité.",
     ],
     color: "#b59b6a",
-    imagePortrait: images.atelierSculpture1,
+    imagePortrait: images.stephanieVanderMeiren,
     imageAction: images.masque,
   },
   {
